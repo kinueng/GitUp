@@ -30,6 +30,12 @@ aws s3 cp --profile gitup "s3://gitup-builds/continuous/GitUp-$VERSION.zip" "$AR
 
 ARCHIVE_SIZE=`stat -f "%z" "$ARCHIVE_PATH"`
 
+
+##### Generate SHA digest for the release archive file
+
+DIGEST_SCRIPT_PATH="`pwd`/digest.sh"
+(exec "$DIGEST_SCRIPT_PATH" $ARCHIVE_PATH)
+
 ##### Examine app
 
 rm -rf "$PAYLOAD_PATH"
